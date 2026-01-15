@@ -15,7 +15,7 @@ export default function Navbar() {
                 </select>
                 <FaBell className="text-yellow-700 cursor-pointer" />
                 <div className="flex items-center gap-2">
-                    <img src={userPlaceholder} alt="user" className="rounded-full h-5" />
+                    <img src={userPlaceholder} alt="user" className="rounded-full h-7" />
                     <span>Musfiq</span>
                 </div>
             </div>
