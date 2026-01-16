@@ -18,9 +18,9 @@ export default function Dashboard() {
                         )}
                     </div>
                     {/* Charts */}
-                    <div>
-                        <div>
-                            <h3>Visitor Insights</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-white p-4 rounded shadow">
+                            <h3 className="font-bold mb-2">Visitor Insights</h3>
                             <LineChartComponent
                                 data={visitorInsightsData}
                                 lines={[

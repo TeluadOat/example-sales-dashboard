@@ -9,7 +9,7 @@ export default function LineChartComponent({ data, lines }) {
                 <Tooltip />
                 <Legend />
                 {lines.map((line) => (
-                    <Line key={line.keydata} type="monotone" dataKey={line.dataKey} stroke={line.color} />
+                    <Line key={line.keydata} type="monotone" dataKey={line.dataKey} stroke={line.color} dot={false} strokeWidth={2} />
                 ))}
             </LineChart>
         </ResponsiveContainer>
