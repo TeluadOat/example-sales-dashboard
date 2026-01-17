@@ -28,3 +28,13 @@ export const visitorInsightsData = [
     { month: "Nov", loyal: 290, new: 320, unique: 310 },
     { month: "Dec", loyal: 270, new: 300, unique: 290 },
 ];
+
+export const totalRevenueData = [
+    { name: "Mon", revenue: 1200 },
+    { name: "Tue", revenue: 2100 },
+    { name: "Wed", revenue: 800 },
+    { name: "Thu", revenue: 1600 },
+    { name: "Fri", revenue: 2400 },
+    { name: "Sat", revenue: 1800 },
+    { name: "Sun", revenue: 2200 },
+];
