@@ -2,10 +2,10 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cart
 
 export default function TotalRevenueChart({ data }) {
     return (
-        <div>
-            <div>
-                <h3>Total Revenue</h3>
-                <span>Last 7 days</span>
+        <div className="bg-white p-4 rounded-lg shadow">
+            <div className="flex justify-between items-center mb-4">
+                <h3 className="font-semibold text-gray-800">Total Revenue</h3>
+                <span className="text-sm text-gray-400">Last 7 days</span>
             </div>
 
             <ResponsiveContainer width="100%" height={260}>
@@ -16,9 +16,14 @@ export default function TotalRevenueChart({ data }) {
                     <Tooltip />
                     <Legend />
                     <Bar
-                        dataKey="revenue"
+                        dataKey="online"
                         fill="#6366F1"
-                        radius={[6, 6, 0, 0]}
+                        radius={[2, 2, 0, 0]}
+                    />
+                    <Bar
+                        dataKey="offline"
+                        fill="#22655e"
+                        radius={[2, 2, 0, 0]}
                     />
                 </BarChart>
             </ResponsiveContainer>

@@ -30,11 +30,11 @@ export const visitorInsightsData = [
 ];
 
 export const totalRevenueData = [
-    { name: "Mon", revenue: 1200 },
-    { name: "Tue", revenue: 2100 },
-    { name: "Wed", revenue: 800 },
-    { name: "Thu", revenue: 1600 },
-    { name: "Fri", revenue: 2400 },
-    { name: "Sat", revenue: 1800 },
-    { name: "Sun", revenue: 2200 },
+    { name: "Mon", online: 1200, offline: 800 },
+    { name: "Tue", online: 2100, offline: 1400 },
+    { name: "Wed", online: 800, offline: 600 },
+    { name: "Thu", online: 1600, offline: 1100 },
+    { name: "Fri", online: 2400, offline: 1800 },
+    { name: "Sat", online: 1800, offline: 1300 },
+    { name: "Sun", online: 2200, offline: 1600 },
 ];
