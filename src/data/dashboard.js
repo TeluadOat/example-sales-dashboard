@@ -8,11 +8,12 @@ export const kpiData = [
 ];
 
 export const topProducts = [
-    { name: "Home Decor Range", popularity: 45, sales: 45 },
-    { name: "Disney Princess Pink Bag 18\"", popularity: 29, sales: 29 },
-    { name: "Bathroom Essentials", popularity: 18, sales: 18 },
-    { name: "Apple Smartwatches", popularity: 25, sales: 25 },
+    { name: "Home Decor Range", popularity: 78, sales: "45%", color: "#6366f1" },
+    { name: "Disney Princess Dress", popularity: 62, sales: "29%", color: "#22c55e" },
+    { name: "Bathroom Essentials", popularity: 51, sales: "18%", color: "#f97316" },
+    { name: "Apple Smartwatch", popularity: 85, sales: "61%", color: "#ef4444" },
 ];
+
 
 export const visitorInsightsData = [
     { month: "Jan", loyal: 200, new: 250, unique: 220 },

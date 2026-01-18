@@ -4,6 +4,7 @@ import KPIcard from "../components/KPIcard";
 import { kpiData, visitorInsightsData, totalRevenueData } from "../data/dashboard";
 import LineChartComponent from "../components/LineChart";
 import TotalRevenueChart from "../components/TotalRevenueChart";
+import TopProducts from "../components/TopProducts";
 
 export default function Dashboard() {
     return (
@@ -29,8 +30,11 @@ export default function Dashboard() {
                         </div>
                     </div>
                     {/* Charts */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <TotalRevenueChart data={totalRevenueData} />
+                    <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-4 mb-6">
+                        <div className="grid grid-rows-2 gap-4">
+                            <TotalRevenueChart data={totalRevenueData} />
+                            <TopProducts />
+                        </div>
                     </div>
                 </div>
             </div>
