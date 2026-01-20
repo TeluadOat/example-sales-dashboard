@@ -1,4 +1,4 @@
-export default function ({ title, value, change, bgColor, icon }) {
+export default function KPIcard({ title, value, change, bgColor, icon }) {
     return (
         <div className={`flex flex-col justify-between p-2 gap-2 rounded-lg ${bgColor}`}>
             <div className="text-3xl">{icon}</div>

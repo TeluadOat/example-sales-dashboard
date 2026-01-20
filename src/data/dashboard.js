@@ -40,6 +40,17 @@ export const totalRevenueData = [
     { name: "Sun", online: 2200, offline: 1600 },
 ];
 
+// export const customerSatisfactionData = [
+//     { day: "Mon", thisMonth: 82, lastMonth: 40 },
+//     { day: "Tue", thisMonth: 70, lastMonth: 50 },
+//     { day: "Wed", thisMonth: 79, lastMonth: 25 },
+//     { day: "Thu", thisMonth: 65, lastMonth: 26 },
+//     { day: "Fri", thisMonth: 75, lastMonth: 28 },
+//     { day: "Sat", thisMonth: 55, lastMonth: 35 },
+//     { day: "Sun", thisMonth: 88, lastMonth: 50 },
+// ];
+
+
 export const customerSatisfactionData = [
     { day: "Mon", thisMonth: 82, lastMonth: 40 },
     { day: "Tue", thisMonth: 70, lastMonth: 50 },
@@ -48,4 +59,26 @@ export const customerSatisfactionData = [
     { day: "Fri", thisMonth: 75, lastMonth: 28 },
     { day: "Sat", thisMonth: 55, lastMonth: 35 },
     { day: "Sun", thisMonth: 88, lastMonth: 50 },
+].map(d => ({
+    ...d,
+    band: d.thisMonth - d.lastMonth,
+}));
+
+export const targetRealityData = [
+    { name: "Jan", reality: 60, target: 80 },
+    { name: "Feb", reality: 55, target: 75 },
+    { name: "Mar", reality: 50, target: 70 },
+    { name: "Apr", reality: 65, target: 75 },
+    { name: "May", reality: 70, target: 85 },
+    { name: "Jun", reality: 75, target: 90 },
+    { name: "Jul", reality: 80, target: 95 },
+];
+
+export const volumeServiceData = [
+    { name: "Mon", volume: 60, service: 40 },
+    { name: "Tue", volume: 75, service: 55 },
+    { name: "Wed", volume: 65, service: 35 },
+    { name: "Thu", volume: 55, service: 45 },
+    { name: "Fri", volume: 50, service: 40 },
+    { name: "Sat", volume: 45, service: 35 },
 ];

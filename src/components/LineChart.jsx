@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, ReferenceDot } from "recharts";
 
 
 export default function LineChartComponent({ data, lines }) {
@@ -8,21 +8,31 @@ export default function LineChartComponent({ data, lines }) {
             { dataKey: "new", color: "#ef4444" },
             { dataKey: "unique", color: "#10b981" },
         ];
+
+    const formatLegendText = text => {
+        return `${text.charAt(0).toUpperCase()}${text.slice(1)} Customers`
+    };
+
     return (
-
-
         <div className="bg-white p-4 rounded h-full flex flex-col shadow min-h-[320px]">
-            <h3 className="font-bold mb-2">Visitor Insights</h3>
+            <h3 className="font-semibold mb-2">Visitor Insights</h3>
             <div className="h-[250px] md:h-[300px] lg:h-[100%]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
-                        <XAxis dataKey="month" />
-                        <YAxis />
+                    <LineChart data={data} margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
+                        <XAxis dataKey="month" axisLine={false} tickLine={false} />
+                        <YAxis axisLine={false} tickLine={false} dx={-10} />
                         <Tooltip />
-                        <Legend />
+                        <Legend
+                            iconType="square"
+                            iconSize={7}
+                            formatter={(value) => formatLegendText(value)}
+                            wrapperStyle={{ position: "absolute", left: "50%", transform: "translateX(-45%)" }}
+                        />
                         {lines.map((line) => (
                             <Line key={line.keydata} type="monotone" dataKey={line.dataKey} stroke={line.color} dot={false} strokeWidth={2} />
                         ))}
+                        <ReferenceLine x="Jul" stroke="rgba(150, 40, 10, 0.3)" />
+                        <ReferenceDot x="Jul" y={380} r={4} fill="red" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

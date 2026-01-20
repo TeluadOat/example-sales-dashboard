@@ -9,7 +9,7 @@ function hexToRgba(hex, alpha = 0.12) {
 export default function TopProducts() {
     return (
         <div className="bg-white p-4 rounded shadow flex flex-col"
-            style={{ height: "clamp(220px, 28vh, 340px)" }}
+
         >
             <h3 className="font-semibold mb-3">Top Products</h3>
             <div className="flex-1">
