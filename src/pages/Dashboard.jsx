@@ -1,4 +1,5 @@
-import Sidebar from "../components/sidebar";
+import { useState } from "react";
+import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import KPIcard from "../components/KPIcard";
 import { kpiData, visitorInsightsData, totalRevenueData, targetRealityData, volumeServiceData, customerSatisfactionData } from "../data/dashboard";
@@ -11,12 +12,14 @@ import VolumeService from "../components/VolumeService";
 import SalesMapping from "../components/SalesMapping";
 
 export default function Dashboard() {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
-        <div className="flex">
-            <Sidebar active="Dashboard" />
-            <div className="flex-1 flex flex-col">
-                <Navbar />
-                <div className="p-6 bg-gray-50 flex-1">
+        <div className="flex flex-col md:flex-row">
+            <Sidebar active="Dashboard" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+            <div className="flex-1 flex flex-col w-full overflow-x-hidden">
+                <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+                <div className="p-3 md:p-6 bg-gray-50 flex-1 overflow-x-auto">
                     {/* ===== top row ===== */}
                     <div className="flex flex-col lg:flex-row gap-4 mb-6">
                         {/* KPI Cards */}
