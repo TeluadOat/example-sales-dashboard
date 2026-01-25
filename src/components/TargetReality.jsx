@@ -6,7 +6,7 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-import { FaBell } from "react-icons/fa";
+import { FaRegBell } from "react-icons/fa";
 
 export default function TargetReality({ data }) {
     const realityTotal = data.reduce((a, b) => a + b.reality, 0);
@@ -39,10 +39,10 @@ export default function TargetReality({ data }) {
             </div>
 
             {/* ✅ Custom Legend */}
-            <div className="flex flex-col justify-between mt-3 text-sm">
+            <div className="ml-3 flex flex-col justify-between mt-3 text-sm">
                 <div className="flex items-center gap-2 w-3/5">
                     <span className="inline-flex items-center justify-center p-2 bg-green-200 h-8 w-8">
-                        <FaBell />
+                        <FaRegBell className="text-green-600" />
                     </span>
                     <div>
                         <p className="font-semibold">Reality Sales</p>
@@ -53,7 +53,7 @@ export default function TargetReality({ data }) {
 
                 <div className="flex items-center gap-2 w-3/5">
                     <span className="inline-flex items-center justify-center p-2 bg-yellow-200 h-8 w-8">
-                        <FaBell />
+                        <FaRegBell className="text-yellow-600" />
                     </span>
                     <div>
                         <p className="font-semibold">Target Sales</p>

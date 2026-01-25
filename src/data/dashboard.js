@@ -50,7 +50,9 @@ export const customerSatisfactionData = [
     { day: "Sun", thisMonth: 88, lastMonth: 50 },
 ].map(d => ({
     ...d,
-    band: d.thisMonth - d.lastMonth,
+    // `band` is the positive difference between thisMonth and lastMonth.
+    // Use `null` when `lastMonth` is missing so the Area won't render there.
+    band: typeof d.lastMonth === "number" ? Math.max(d.thisMonth - d.lastMonth, 0) : null,
 }));
 
 export const targetRealityData = [
