@@ -16,9 +16,9 @@ export default function LineChartComponent({ data, lines }) {
     return (
         <div className="bg-white p-4 rounded h-full flex flex-col shadow min-h-[320px]">
             <h3 className="font-semibold mb-2">Visitor Insights</h3>
-            <div className="h-[250px] md:h-[300px] lg:h-[100%]">
+            <div className="h-[250px] md:h-[300px] lg:h-full">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data} margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
+                    <LineChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 20 }}>
                         <XAxis dataKey="month" axisLine={false} tickLine={false} />
                         <YAxis axisLine={false} tickLine={false} dx={-10} />
                         <Tooltip />
@@ -26,7 +26,7 @@ export default function LineChartComponent({ data, lines }) {
                             iconType="square"
                             iconSize={7}
                             formatter={(value) => formatLegendText(value)}
-                            wrapperStyle={{ position: "absolute", left: "50%", transform: "translateX(-45%)" }}
+                            wrapperStyle={{ left: "50%", transform: "translate(-45% , 25%)" }}
                         />
                         {lines.map((line) => (
                             <Line key={line.keydata} type="monotone" dataKey={line.dataKey} stroke={line.color} dot={false} strokeWidth={2} />

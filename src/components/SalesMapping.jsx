@@ -1,3 +1,4 @@
+import mapping from '../assets/images/mapping.jpg'
 export default function SalesMapping() {
     return (
         <div className="bg-white p-4 rounded-xl shadow flex flex-col">
@@ -5,7 +6,7 @@ export default function SalesMapping() {
 
             <div className="flex-1 flex items-center justify-center">
                 <img
-                    src="/images/map.jpg"
+                    src={mapping}
                     alt="map"
                     className="w-full h-full object-contain"
                 />

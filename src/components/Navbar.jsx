@@ -3,10 +3,10 @@ import userPlaceholder from "../assets/images/user-placeholder.webp";
 
 export default function Navbar({ onMenuClick }) {
     return (
-        <div className="flex justify-between items-center bg-white p-4 shadow overflow-hidden">
+        <div className="fixed w-full z-30 flex justify-between items-center bg-white p-4 shadow overflow-hidden">
             <div className="flex items-center gap-2 md:gap-4 min-w-0">
                 <button
-                    className="md:hidden text-gray-700 hover:text-gray-900 cursor-pointer flex-shrink-0"
+                    className="lg:hidden text-gray-700 hover:text-gray-900 cursor-pointer flex-shrink-0"
                     onClick={onMenuClick}
                 >
                     <FaBars size={24} />

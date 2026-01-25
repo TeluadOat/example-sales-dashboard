@@ -19,7 +19,7 @@ export default function Dashboard() {
             <Sidebar active="Dashboard" isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
             <div className="flex-1 flex flex-col w-full overflow-x-hidden">
                 <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-                <div className="p-3 md:p-6 bg-gray-50 flex-1 overflow-x-auto">
+                <div className="p-3 mt-15 md:p-6 bg-gray-50 flex-1 overflow-x-auto">
                     {/* ===== top row ===== */}
                     <div className="flex flex-col lg:flex-row gap-4 mb-6">
                         {/* KPI Cards */}
@@ -28,7 +28,7 @@ export default function Dashboard() {
                                 <h3 className="font-semibold">Today's Sales</h3>
                                 <small className="text-gray-400">Sales Summary</small>
                             </div>
-                            <div className="grid grid-cols-2 lg:grid-cols-4 mb-6 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6 gap-4">
                                 {kpiData.map((kpi) =>
                                     <KPIcard key={kpi.title} {...kpi} />
                                 )}

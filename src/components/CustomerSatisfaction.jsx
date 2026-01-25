@@ -18,7 +18,7 @@ export default function CustomerSatisfaction({ data }) {
             <div className="flex-1">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={data}>
-                        <XAxis dataKey="day" />
+                        <XAxis dataKey="day" hide />
                         <YAxis hide />
                         <Tooltip />
 

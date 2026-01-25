@@ -17,18 +17,19 @@ export default function Sidebar({ active, isOpen, setIsOpen }) {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-opacity-10 z-40 md:hidden"
+          className="fixed inset-0 bg-black/20 z-40 p-5 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
       {/* Sidebar */}
-      <div className={`w-64 h-screen fixed md:sticky md:top-0 md:z-0 z-50 bg-white p-4 flex flex-col justify-between shadow-lg transition-transform duration-300 md:transition-none ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+      <div className={`w-64 h-screen fixed lg:sticky lg:top-0 lg:z-0 z-50 bg-white p-4 flex flex-col justify-between shadow-lg transition-transform duration-300 lg:transition-none 
+        ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}>
         <div>
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-xl font-bold">Dabang</h1>
             <button
-              className="md:hidden text-gray-500 hover:text-gray-700"
+              className="lg:hidden text-gray-500 hover:text-gray-700"
               onClick={() => setIsOpen(false)}
             >
               <FaTimes size={20} />

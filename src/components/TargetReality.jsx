@@ -6,6 +6,7 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
+import { FaBell } from "react-icons/fa";
 
 export default function TargetReality({ data }) {
     const realityTotal = data.reduce((a, b) => a + b.reality, 0);
@@ -39,20 +40,26 @@ export default function TargetReality({ data }) {
 
             {/* ✅ Custom Legend */}
             <div className="flex flex-col justify-between mt-3 text-sm">
-                <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 bg-green-500 rounded-full" />
+                <div className="flex items-center gap-2 w-3/5">
+                    <span className="inline-flex items-center justify-center p-2 bg-green-200 h-8 w-8">
+                        <FaBell />
+                    </span>
                     <div>
-                        <p className="text-gray-500">Reality Sales</p>
-                        <p className="font-semibold">{realityTotal.toLocaleString()}</p>
+                        <p className="font-semibold">Reality Sales</p>
+                        <small className="text-gray-400">Stat</small>
                     </div>
+                    <p className="font-semibold text-green-600 text-lg flex-shrink-0 ml-auto">{realityTotal.toLocaleString()}</p>
                 </div>
 
-                <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 bg-yellow-400 rounded-full" />
+                <div className="flex items-center gap-2 w-3/5">
+                    <span className="inline-flex items-center justify-center p-2 bg-yellow-200 h-8 w-8">
+                        <FaBell />
+                    </span>
                     <div>
-                        <p className="text-gray-500">Target Sales</p>
-                        <p className="font-semibold">{targetTotal.toLocaleString()}</p>
+                        <p className="font-semibold">Target Sales</p>
+                        <small className="text-gray-400">Commerce</small>
                     </div>
+                    <p className="font-semibold text-yellow-600 text-lg flex-shrink-0 ml-auto">{targetTotal.toLocaleString()}</p>
                 </div>
             </div>
         </div>
