@@ -18,7 +18,7 @@ export default function LineChartComponent({ data, lines }) {
             <h3 className="font-semibold mb-2">Visitor Insights</h3>
             <div className="h-[250px] md:h-[300px] lg:h-full">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 20 }}>
+                    <LineChart data={data} margin={{ top: 6, right: 0, left: 0, bottom: 20 }}>
                         <XAxis dataKey="month" axisLine={false} tickLine={false} />
                         <YAxis axisLine={false} tickLine={false} dx={-10} />
                         <Tooltip />
@@ -32,7 +32,7 @@ export default function LineChartComponent({ data, lines }) {
                             <Line key={line.keydata} type="monotone" dataKey={line.dataKey} stroke={line.color} dot={false} strokeWidth={2} />
                         ))}
                         <ReferenceLine x="Jul" stroke="rgba(150, 40, 10, 0.3)" />
-                        <ReferenceDot x="Jul" y={380} r={4} fill="red" />
+                        <ReferenceDot x="Jul" y={380} r={5} fill="red" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
