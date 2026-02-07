@@ -38,7 +38,24 @@ export default function CustomerSatisfaction({ data }) {
                             )}
                         />
 
-                        🔵 Blue shade to X-axis
+                        {/*  Last month line */}
+                        <Line
+                            type="monotone"
+                            dataKey="lastMonth"
+                            stroke="#3b82f6"
+                            strokeWidth={2.5}
+                            dot={{ r: 4, fill: "#3b82f6" }}
+                        />
+
+                        {/* This month line */}
+                        <Line
+                            type="monotone"
+                            dataKey="thisMonth"
+                            stroke="#22c55e"
+                            strokeWidth={2.5}
+                            dot={{ r: 4, fill: "#22c55e" }}
+                        />
+                        {/* Blue shade to X-axis */}
                         <Area
                             type="monotone"
                             dataKey="lastMonth"
@@ -47,31 +64,13 @@ export default function CustomerSatisfaction({ data }) {
                             stackId="1"
                         />
 
-                        {/* 🟢 Green shade BETWEEN lines (stacked on top of lastMonth) */}
+                        {/* Green shade BETWEEN lines (stacked on top of lastMonth) */}
                         <Area
                             type="monotone"
                             dataKey="band"
                             stroke="none"
                             fill="rgba(34,197,94,0.25)"
                             stackId="1"
-                        />
-
-                        {/* 🔵 Last month line */}
-                        <Line
-                            type="monotone"
-                            dataKey="lastMonth"
-                            stroke="#3b82f6"
-                            strokeWidth={2.5}
-                            dot={{ r: 4 }}
-                        />
-
-                        {/* 🟢 This month line */}
-                        <Line
-                            type="monotone"
-                            dataKey="thisMonth"
-                            stroke="#22c55e"
-                            strokeWidth={2.5}
-                            dot={{ r: 4 }}
                         />
                     </ComposedChart>
                 </ResponsiveContainer>

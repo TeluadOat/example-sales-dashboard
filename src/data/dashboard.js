@@ -73,3 +73,10 @@ export const volumeServiceData = [
     { name: "Fri", volume: 50, service: 40 },
     { name: "Sat", volume: 45, service: 35 },
 ];
+
+export const salesData = [
+    { country: "Nigeria", totalSales: 120000 },
+    { country: "Ghana", totalSales: 90000 },
+    { country: "USA", totalSales: 600000 },
+    { country: "Brazil", totalSales: 250000 },
+];
