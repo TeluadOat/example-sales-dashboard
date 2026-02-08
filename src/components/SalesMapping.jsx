@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import { salesData } from '../data/dashboard';
-import worldData from '../data/world.json.json';
+import worldData from '../data/world.json';
 import 'leaflet/dist/leaflet.css';
 
 
@@ -25,13 +25,13 @@ export default function SalesMapping() {
         <div className="bg-white p-4 rounded-xl shadow">
             <h3 className="font-semibold mb-2">Sales Mapping by Country</h3>
             <MapContainer
-                style={{ height: '400px', width: '100%' }}
+                style={{ height: '80%', minHeight: "400px", width: '100%' }}
                 zoom={2}
-                center={[50, 0]}
+                center={[20, 0]}
             >
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <GeoJSON data={worldData} style={style} />
             </MapContainer>
-        </div>
+        </div >
     );
 }
