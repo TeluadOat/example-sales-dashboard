@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import KPIcard from "../components/KPIcard";
-import { kpiData, visitorInsightsData, totalRevenueData, targetRealityData, volumeServiceData, customerSatisfactionData } from "../data/dashboard";
+import KPI from "../components/KPI/KPI";
+import { visitorInsightsData, totalRevenueData, targetRealityData, volumeServiceData, customerSatisfactionData } from "../data/dashboard";
 import LineChartComponent from "../components/LineChart";
 import TotalRevenueChart from "../components/TotalRevenueChart";
 import TopProducts from "../components/TopProducts";
@@ -23,17 +23,7 @@ export default function Dashboard() {
                     {/* ===== top row ===== */}
                     <div className="flex flex-col lg:flex-row gap-4 mb-6">
                         {/* KPI Cards */}
-                        <div className="flex flex-col justify-between bg-white p-4 rounded shadow w-full lg:w-3/5">
-                            <div className="flex flex-col mb-2">
-                                <h3 className="font-semibold">Today's Sales</h3>
-                                <small className="text-gray-400">Sales Summary</small>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6 gap-4">
-                                {kpiData.map((kpi) =>
-                                    <KPIcard key={kpi.title} {...kpi} />
-                                )}
-                            </div>
-                        </div>
+                        <KPI />
                         {/* chart */}
                         <div className="w-full lg:w-2/5">
                             <LineChartComponent data={visitorInsightsData} />
@@ -56,8 +46,8 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
         </div >
     )
 }
