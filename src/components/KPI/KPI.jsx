@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import KPIcard from "./KPIcard";
-import { getKpis } from "../../services";
+import { getKpis } from "../../services/api";
 import { FaChartBar, FaCartArrowDown, FaChartLine, FaUserCircle } from "react-icons/fa";
 
 export default function KPI() {
@@ -9,11 +9,19 @@ export default function KPI() {
     const [error, setError] = useState(null);
 
     const bgMap = {
-        sales: "red",
-        orders: "orange",
-        products: "green",
-        customers: "purple"
+        sales: "bg-red-100",
+        orders: "bg-orange-100",
+        products: "bg-green-100",
+        customers: "bg-purple-100",
     };
+
+    const iconBgMap = {
+        sales: "bg-red-500",
+        orders: "bg-orange-500",
+        products: "bg-green-500",
+        customers: "bg-purple-500",
+    };
+
 
     const iconMap = {
         sales: FaChartBar,
@@ -47,10 +55,10 @@ export default function KPI() {
                             key={kpi.name}
                             icon={
                                 <div
-                                    className="flex items-center justify-center rounded-full opacity-80 ml-1 w-6 h-6 md:w-10 md:h-10"
-                                    style={{ background: bgMap[kpi.category] }}
+                                    className={`flex items-center justify-center rounded-full opacity-80 ml-1 w-6 h-6 md:w-10 md:h-10
+                                    ${iconBgMap[kpi.category]}`}
                                 >
-                                    <Icon className="w-4 h-4 md:w-6 md-h6 text-white" />
+                                    <Icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
                                 </div>}
                             bgColor={bgMap[kpi.category]}
                             {...kpi}
