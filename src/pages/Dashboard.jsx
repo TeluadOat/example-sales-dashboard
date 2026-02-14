@@ -2,13 +2,13 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import KPI from "../components/KPI/KPI";
-import { visitorInsightsData, totalRevenueData, targetRealityData, volumeServiceData, customerSatisfactionData } from "../data/dashboard";
+import { targetRealityData, volumeServiceData } from "../data/dashboard";
 import LineChartComponent from "../components/LineChart";
 import TotalRevenueChart from "../components/TotalRevenueChart";
 import TopProducts from "../components/TopProducts";
-import CustomerSatisfaction from "../components/CustomerSatisfaction";
+import CustomerSatisfaction from "../components/customerSatisfaction/CustomerSatisfaction";
 import TargetReality from "../components/TargetReality";
-import VolumeService from "../components/VolumeService";
+import VolumeService from "../components/volumeService/VolumeService";
 import SalesMapping from "../components/SalesMapping";
 
 export default function Dashboard() {
@@ -26,18 +26,18 @@ export default function Dashboard() {
                         <KPI />
                         {/* chart */}
                         <div className="w-full lg:w-2/5">
-                            <LineChartComponent data={visitorInsightsData} />
+                            <LineChartComponent />
                         </div>
                     </div>
                     {/* Charts */}
                     <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-4 mb-6">
                         <div className="grid grid-rows-2 gap-4">
-                            <TotalRevenueChart data={totalRevenueData} />
+                            <TotalRevenueChart />
                             <TopProducts />
                         </div>
                         <div className="grid grid-rows-2 gap-4 h-full">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
-                                <CustomerSatisfaction data={customerSatisfactionData} />
+                                <CustomerSatisfaction />
                                 <TargetReality data={targetRealityData} />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">

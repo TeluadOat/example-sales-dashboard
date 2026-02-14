@@ -1,17 +1,65 @@
+import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, ReferenceDot } from "recharts";
+import { getVisitorInsights } from "../services/api";
+import { useMemo } from "react";
 
 
-export default function LineChartComponent({ data, lines }) {
-    lines =
+export default function LineChartComponent() {
+    const [data, setData] = useState([]);
+
+
+    function getHighestOverall(data) {
+        let best = {
+            value: -Infinity,
+            month: null,
+            type: null,
+        };
+
+        for (let row of data) {
+            const entries = [
+                ["loyalVisitors", row.loyalVisitors],
+                ["newVisitors", row.newVisitors],
+                ["uniqueVisitors", row.uniqueVisitors],
+            ];
+
+            for (let [type, value] of entries) {
+                if (value > best.value) {
+                    best = {
+                        value,
+                        month: row.month,
+                        type
+                    }
+                }
+            }
+        }
+
+        return best;
+
+    };
+
+    const lines =
         [
-            { dataKey: "loyal", color: "#7c3aed" },
-            { dataKey: "new", color: "#ef4444" },
-            { dataKey: "unique", color: "#10b981" },
+            { dataKey: "loyalVisitors", color: "#7c3aed" },
+            { dataKey: "newVisitors", color: "#ef4444" },
+            { dataKey: "uniqueVisitors", color: "#10b981" },
         ];
 
     const formatLegendText = text => {
         return `${text.charAt(0).toUpperCase()}${text.slice(1)} Customers`
     };
+
+    useEffect(() => {
+        getVisitorInsights()
+            .then(data => {
+                setData(data);
+            })
+            .catch(err => console.error('Error fetching visitor insights:', err));
+    }, []);
+
+    const highestData = useMemo(() => {
+        if (!data.length) return null;
+        return getHighestOverall(data);
+    })
 
     return (
         <div className="bg-white p-4 rounded h-full flex flex-col shadow min-h-[320px]">
@@ -29,10 +77,10 @@ export default function LineChartComponent({ data, lines }) {
                             wrapperStyle={{ left: "50%", transform: "translate(-45% , 25%)" }}
                         />
                         {lines.map((line) => (
-                            <Line key={line.keydata} type="monotone" dataKey={line.dataKey} stroke={line.color} dot={false} strokeWidth={2} />
+                            <Line key={line.dataKey} type="monotone" dataKey={line.dataKey} stroke={line.color} dot={false} strokeWidth={2} />
                         ))}
-                        <ReferenceLine x="Jul" stroke="rgba(150, 40, 10, 0.3)" />
-                        <ReferenceDot x="Jul" y={380} r={5} fill="red" />
+                        <ReferenceLine x={highestData?.month} stroke="rgba(150, 40, 10, 0.3)" />
+                        <ReferenceDot x={highestData?.month} y={highestData?.value} r={5} fill="red" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

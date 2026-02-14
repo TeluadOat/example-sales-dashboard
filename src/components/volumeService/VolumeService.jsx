@@ -7,7 +7,7 @@ import {
     ResponsiveContainer,
     Legend,
 } from "recharts";
-import CustomLegend from "./volumeService/CustomLegend";
+import CustomLegend from "./CustomLegend";
 
 export default function VolumeService({ data }) {
     const totalService = data.reduce((sum, d) => sum + d.service, 0);

@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
+import { getRevenue } from "../services/api";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from "recharts";
 
-export default function TotalRevenueChart({ data }) {
+export default function TotalRevenueChart() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        getRevenue()
+            .then(data => setData(data))
+            .catch(err => console.error('Error fetching data', err))
+    }, []);
+
     return (
         <div className="bg-white p-4 rounded-lg shadow">
             <div className="flex justify-between items-center mb-4">
@@ -11,17 +21,17 @@ export default function TotalRevenueChart({ data }) {
             <ResponsiveContainer width="100%" height={260}>
                 <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="channel" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
                     <Bar
-                        dataKey="online"
+                        dataKey="onlineSales"
                         fill="#6366F1"
                         radius={[2, 2, 0, 0]}
                     />
                     <Bar
-                        dataKey="offline"
+                        dataKey="offlineSales"
                         fill="#22655e"
                         radius={[2, 2, 0, 0]}
                     />

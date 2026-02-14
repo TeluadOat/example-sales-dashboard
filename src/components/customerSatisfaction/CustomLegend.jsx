@@ -20,7 +20,7 @@ export default function CustomLegend({ payload = [], totals = {} }) {
     return (
         <div className="flex justify-center gap-4 border-t pt-3 border-t-gray-200">
             {items.map((entry, index) => {
-                const label = entry && entry.value ? (entry.value.charAt(0).toUpperCase() + entry.value.slice(1)) : '';
+                const label = entry?.value ?? "";
                 const amount = totals && entry && entry.dataKey ? totals[entry.dataKey] : undefined;
 
                 // Derive color from several possible fields Recharts might provide

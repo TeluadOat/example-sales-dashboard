@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     ComposedChart,
     Line,
@@ -8,15 +9,32 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
-import CustomLegend from "./customerSatisfaction/CustomLegend";
+import { getCustomerSatisfactions } from "../../services/api";
+import CustomLegend from "./CustomLegend";
 
-export default function CustomerSatisfaction({ data }) {
-    const lastMonthTotal = data.reduce((sum, d) => sum + d.lastMonth, 0);
-    const thisMonthTotal = data.reduce((sum, d) => sum + d.thisMonth, 0);
-    const chartData = data.map((d) => ({
-        ...d,
-        band: Math.max(0, (d.thisMonth ?? 0) - (d.lastMonth ?? 0)),
-    }));
+export default function CustomerSatisfaction() {
+    const [data, setData] = useState([]);
+    console.log(data);
+
+    useEffect(() => {
+        getCustomerSatisfactions()
+            .then(setData)
+            .catch(err => console.error('Error fetching cutomer satisafaction data', err));
+    }, []);
+    const workedData = data.map(d => {
+        const prev = d.previousMonthAverage ?? 0;
+        const curr = d.currentMonthAverage ?? 0;
+
+        return {
+            ...d,
+            date: new Date(d.date).toLocaleDateString("en-US", { weekday: "short" }),
+            band: Math.max(curr - prev, 0)
+        };
+    });
+
+    const previousMonthTotal = workedData.reduce((sum, d) => sum + d.previousMonthAverage ?? 0, 0);
+    const currentMonthTotal = workedData.reduce((sum, d) => sum + d.currentMonthAverage ?? 0, 0);
+
 
     return (
         <div className="bg-white p-4 rounded shadow flex flex-col h-full min-h-[220px]"
@@ -25,23 +43,24 @@ export default function CustomerSatisfaction({ data }) {
 
             <div className="flex-1">
                 <ResponsiveContainer width="100%" height="100%">
-                    <ComposedChart data={chartData}>
-                        <XAxis dataKey="day" hide />
+                    <ComposedChart data={workedData}>
+                        <XAxis dataKey="date" hide />
                         <YAxis hide />
                         <Tooltip />
                         <Legend
                             content={(props) => (
                                 <CustomLegend
                                     {...props}
-                                    totals={{ lastMonth: lastMonthTotal, thisMonth: thisMonthTotal }}
+                                    totals={{ previousMonthAverage: previousMonthTotal, currentMonthAverage: currentMonthTotal }}
                                 />
                             )}
                         />
 
                         {/*  Last month line */}
                         <Line
+                            name="Last Month"
                             type="monotone"
-                            dataKey="lastMonth"
+                            dataKey="previousMonthAverage"
                             stroke="#3b82f6"
                             strokeWidth={2.5}
                             dot={{ r: 4, fill: "#3b82f6" }}
@@ -49,8 +68,9 @@ export default function CustomerSatisfaction({ data }) {
 
                         {/* This month line */}
                         <Line
+                            name="This Month"
                             type="monotone"
-                            dataKey="thisMonth"
+                            dataKey="currentMonthAverage"
                             stroke="#22c55e"
                             strokeWidth={2.5}
                             dot={{ r: 4, fill: "#22c55e" }}
@@ -58,7 +78,7 @@ export default function CustomerSatisfaction({ data }) {
                         {/* Blue shade to X-axis */}
                         <Area
                             type="monotone"
-                            dataKey="lastMonth"
+                            dataKey="previousMonthAverage"
                             stroke="none"
                             fill="rgba(59,130,246,0.25)"
                             stackId="1"
