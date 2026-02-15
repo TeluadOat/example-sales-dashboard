@@ -30,3 +30,8 @@ export const getTargetReality = async () => {
     const res = await fetch(`${BASE_URL}/target-realities`);
     return res.json();
 }
+
+export const getVolumeService = async () => {
+    const res = await fetch(`${BASE_URL}/volume-services`);
+    return res.json();
+}

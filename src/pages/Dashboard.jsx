@@ -2,7 +2,6 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import KPI from "../components/KPI/KPI";
-import { targetRealityData, volumeServiceData } from "../data/dashboard";
 import LineChartComponent from "../components/LineChart";
 import TotalRevenueChart from "../components/TotalRevenueChart";
 import TopProducts from "../components/TopProducts";
@@ -42,7 +41,7 @@ export default function Dashboard() {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
                                 <SalesMapping />
-                                <VolumeService data={volumeServiceData} />
+                                <VolumeService />
                             </div>
                         </div>
                     </div>

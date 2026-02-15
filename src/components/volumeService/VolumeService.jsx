@@ -1,3 +1,5 @@
+import { useEffect, useState, useMemo } from "react";
+import { getVolumeService } from "../../services/api";
 import {
     BarChart,
     Bar,
@@ -9,9 +11,30 @@ import {
 } from "recharts";
 import CustomLegend from "./CustomLegend";
 
-export default function VolumeService({ data }) {
-    const totalService = data.reduce((sum, d) => sum + d.service, 0);
-    const totalVolume = data.reduce((sum, d) => sum + d.volume, 0);
+export default function VolumeService() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        getVolumeService()
+            .then(setData)
+            .catch(err => console.error('Error fetching Volume service data:', err));
+    }, []);
+
+    const chartData = useMemo(() =>
+        data.map(d => ({
+            name: d.serviceName,
+            volume: d.usageCount,
+            service: d.successRate,
+        }))
+        , [data]);
+
+    const { totalService, totalVolume } = useMemo(() => ({
+        totalService: chartData.reduce((sum, d) => sum + d.service, 0),
+        totalVolume: chartData.reduce((sum, d) => sum + d.volume, 0),
+    }), [chartData]);
+
+
     return (
         <div
             className="bg-white p-4 rounded-xl shadow flex flex-col h-[340px] md:h-full"
@@ -20,7 +43,7 @@ export default function VolumeService({ data }) {
 
             <div className="flex-1">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 30 }}>
+                    <BarChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 30 }}>
                         <XAxis dataKey="name" hide />
                         <YAxis hide />
                         <Legend
