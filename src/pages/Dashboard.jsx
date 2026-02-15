@@ -7,7 +7,7 @@ import LineChartComponent from "../components/LineChart";
 import TotalRevenueChart from "../components/TotalRevenueChart";
 import TopProducts from "../components/TopProducts";
 import CustomerSatisfaction from "../components/customerSatisfaction/CustomerSatisfaction";
-import TargetReality from "../components/TargetReality";
+import TargetReality from "../components/target-reality/TargetReality";
 import VolumeService from "../components/volumeService/VolumeService";
 import SalesMapping from "../components/SalesMapping";
 
@@ -38,7 +38,7 @@ export default function Dashboard() {
                         <div className="grid grid-rows-2 gap-4 h-full">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
                                 <CustomerSatisfaction />
-                                <TargetReality data={targetRealityData} />
+                                <TargetReality />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
                                 <SalesMapping />
