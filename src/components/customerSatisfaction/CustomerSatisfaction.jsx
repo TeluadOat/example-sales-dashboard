@@ -14,7 +14,6 @@ import CustomLegend from "./CustomLegend";
 
 export default function CustomerSatisfaction() {
     const [data, setData] = useState([]);
-    console.log(data);
 
     useEffect(() => {
         getCustomerSatisfactions()

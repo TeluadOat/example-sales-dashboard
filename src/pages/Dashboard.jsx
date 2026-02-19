@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import KPI from "../components/KPI/KPI";
 import LineChartComponent from "../components/LineChart";
-import TotalRevenueChart from "../components/TotalRevenueChart";
+import TotalRevenueChart from "../components/revenue/TotalRevenueChart";
 import TopProducts from "../components/TopProducts";
 import CustomerSatisfaction from "../components/customerSatisfaction/CustomerSatisfaction";
 import TargetReality from "../components/target-reality/TargetReality";

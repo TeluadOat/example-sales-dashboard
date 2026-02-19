@@ -35,3 +35,8 @@ export const getVolumeService = async () => {
     const res = await fetch(`${BASE_URL}/volume-services`);
     return res.json();
 }
+
+export const getTopProducts = async () => {
+    const res = await fetch(`${BASE_URL}/top-products/top`);
+    return res.json();
+};

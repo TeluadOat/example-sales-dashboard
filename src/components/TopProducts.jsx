@@ -1,12 +1,29 @@
+import { useEffect, useState, useMemo } from "react";
 import { topProducts } from "../data/dashboard";
-function hexToRgba(hex, alpha = 0.12) {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
+import { getTopProducts } from "../services/api";
+
+
 
 export default function TopProducts() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        getTopProducts()
+            .then(setData)
+            .catch(err => console.error("Error fetching Top Products data:", err));
+    }, []);
+
+    // function hexToRgba(hex, alpha = 0.12) {
+    //     const r = parseInt(hex.slice(1, 3), 16);
+    //     const g = parseInt(hex.slice(3, 5), 16);
+    //     const b = parseInt(hex.slice(5, 7), 16);
+    //     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    // }
+
+    function hslToHsla(hslString, opacity = 0.12) {
+        return hslString.replace(/^hsl\((.+)\)$/i, `hsla($1, ${opacity})`);
+    };
+
     return (
         <div className="bg-white p-4 rounded shadow flex flex-col"
 
@@ -23,8 +40,8 @@ export default function TopProducts() {
                         </tr>
                     </thead>
                     <tbody>
-                        {topProducts.map((item, i) => {
-                            const bg = hexToRgba(item.color);
+                        {data.map((item, i) => {
+                            const bg = hslToHsla(item.color);
                             return (
                                 <tr key={item.name} className="border-b border-gray-300 last:border-none">
                                     <td className="py-3 pr-4">{i + 1}</td>
@@ -37,7 +54,7 @@ export default function TopProducts() {
                                             <div
                                                 className="h-2 rounded"
                                                 style={{
-                                                    width: `${item.popularity}%`,
+                                                    width: `${item.popularityPercent}%`,
                                                     backgroundColor: item.color,
                                                 }}
                                             />
@@ -52,7 +69,7 @@ export default function TopProducts() {
                                                 backgroundColor: bg,
                                             }}
                                         >
-                                            {item.sales}
+                                            {Math.floor(item.popularityPercent)}%
                                         </span>
                                     </td>
                                 </tr>
