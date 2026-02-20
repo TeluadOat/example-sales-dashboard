@@ -1,12 +1,27 @@
-import React from 'react';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { useEffect } from 'react';
+import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import { salesData } from '../data/dashboard';
 import worldData from '../data/world.json';
 import 'leaflet/dist/leaflet.css';
 
+function FitBoundsAndLock() {
+    const map = useMap();
+
+    useEffect(() => {
+        // Create a layer from your GeoJSON
+        const geoLayer = L.geoJSON(worldData);
+        // Fit map to the bounds of the GeoJSON
+        map.fitBounds(geoLayer.getBounds());
+        // Restrict panning
+        map.setMaxBounds(geoLayer.getBounds());
+        // Prevent zooming out beyond initial fit
+        map.setMinZoom(map.getZoom());
+    }, [map]);
+
+    return null;
+}
 
 export default function SalesMapping() {
-
     const getColor = (countryName) => {
         const sales = salesData.find((d) => d.country === countryName)?.totalSales || 0;
         if (sales > 300000) return '#10b981'; // Green for high scores
@@ -17,21 +32,31 @@ export default function SalesMapping() {
     const style = (feature) => ({
         fillColor: getColor(feature.properties.name),
         weight: 1,
-        color: "fff",
+        color: "#fff",
         fillOpacity: 0.7,
     });
 
     return (
-        <div className="bg-white p-4 rounded-xl shadow">
+        <div className="bg-white p-4 rounded-xl shadow relative z-0 h-full w-full">
             <h3 className="font-semibold mb-2">Sales Mapping by Country</h3>
-            <MapContainer
-                style={{ height: '80%', minHeight: "400px", width: '100%' }}
-                zoom={2}
-                center={[20, 0]}
-            >
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <GeoJSON data={worldData} style={style} />
-            </MapContainer>
+
+            <div>
+                <MapContainer
+                    // style={{ height: '400px', minHeight: "100%", width: '100%' }}
+                    style={{ height: '100%', width: '100%', minHeight: '400px', minWidth: '100%' }}
+                    zoom={2}
+                    center={[0, 0]}
+                    scrollWheelZoom={true}
+                    worldCopyJump={false}
+                >
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        noWrap={true}
+                    />
+                    <GeoJSON data={worldData} style={style} />
+                    <FitBoundsAndLock />
+                </MapContainer>
+            </div>
         </div >
     );
 }
