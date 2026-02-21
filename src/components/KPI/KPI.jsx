@@ -48,7 +48,7 @@ export default function KPI() {
             </div>
 
             <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6 gap-4">
-                {kpis.map(kpi => {
+                {Array.isArray(kpis) && kpis.map(kpi => {
                     const Icon = iconMap[kpi.category];
                     return (
                         <KPIcard
