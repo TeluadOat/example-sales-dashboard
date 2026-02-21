@@ -12,7 +12,7 @@ export const getVisitorInsights = async () => {
 }
 
 export const getSalesMap = async () => {
-    const res = await fetch(`${BASE_URL}/sales-map`);
+    const res = await fetch(`${BASE_URL}/sales-maps`);
     return res.json();
 }
 
