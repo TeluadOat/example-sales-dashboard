@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
-import { salesData } from '../data/dashboard';
+import { getSalesMap } from '../services/api';
 import worldData from '../data/world.json';
 import 'leaflet/dist/leaflet.css';
 
 function FitBoundsAndLock() {
+
     const map = useMap();
 
     useEffect(() => {
@@ -22,8 +23,17 @@ function FitBoundsAndLock() {
 }
 
 export default function SalesMapping() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        getSalesMap()
+            .then(setData)
+            .catch(err => console.error("Error loading sales map data:", err));
+    });
+
+
     const getColor = (countryName) => {
-        const sales = salesData.find((d) => d.country === countryName)?.totalSales || 0;
+        const sales = data.find((d) => d.country === countryName)?.totalSales || 0;
         if (sales > 300000) return '#10b981'; // Green for high scores
         if (sales > 100000) return '#f59e0b'; // Yellow for medium scores
         return '#ef4444'; // Red for low scores

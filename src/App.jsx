@@ -1,9 +1,11 @@
 import Dashboard from "./pages/Dashboard";
-
+import { SidebarProvider } from "./contexts/SidebarContext";
 
 function App() {
   return (
-    <Dashboard />
+    <SidebarProvider>
+      <Dashboard />
+    </SidebarProvider>
   )
 }
 
