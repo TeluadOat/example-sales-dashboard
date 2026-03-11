@@ -11,15 +11,19 @@ import {
 } from "recharts";
 import { getCustomerSatisfactions } from "../../services/api";
 import CustomLegend from "./CustomLegend";
+import CustomerSatisfactionSkeleton from "./customerSatisfactionSkeleton";
 
 export default function CustomerSatisfaction() {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getCustomerSatisfactions()
             .then(setData)
-            .catch(err => console.error('Error fetching cutomer satisafaction data', err));
+            .catch(err => console.error('Error fetching cutomer satisafaction data', err))
+            .finally(() => setLoading(false))
     }, []);
+
     const workedData = data.map(d => {
         const prev = d.previousMonthAverage ?? 0;
         const curr = d.currentMonthAverage ?? 0;
@@ -34,6 +38,7 @@ export default function CustomerSatisfaction() {
     const previousMonthTotal = workedData.reduce((sum, d) => sum + d.previousMonthAverage ?? 0, 0);
     const currentMonthTotal = workedData.reduce((sum, d) => sum + d.currentMonthAverage ?? 0, 0);
 
+    if (loading) return (<CustomerSatisfactionSkeleton />);
 
     return (
         <div className="bg-white p-4 rounded shadow flex flex-col h-full min-h-[220px]"

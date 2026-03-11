@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, ReferenceDot } from "recharts";
 import { getVisitorInsights } from "../../services/api";
+import VisistorInsightsSkeleton from "./VisitorInsightsSkeleton";
 import { useMemo } from "react";
 
 
 export default function LineChartComponent() {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
     function getHighestOverall(data) {
@@ -34,7 +36,6 @@ export default function LineChartComponent() {
         }
 
         return best;
-
     };
 
     const lines =
@@ -50,16 +51,18 @@ export default function LineChartComponent() {
 
     useEffect(() => {
         getVisitorInsights()
-            .then(data => {
-                setData(data);
-            })
-            .catch(err => console.error('Error fetching visitor insights:', err));
+            .then(data => setData(data))
+            .catch(err => console.error('Error fetching visitor insights:', err))
+            .finally(() => setLoading(false));
     }, []);
 
     const highestData = useMemo(() => {
         if (!data.length) return null;
         return getHighestOverall(data);
     })
+
+
+    if (loading) return (<VisistorInsightsSkeleton />);
 
     return (
         <div className="bg-white p-4 rounded h-full flex flex-col shadow min-h-[320px]">

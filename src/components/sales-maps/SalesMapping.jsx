@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import { getSalesMap } from '../../services/api';
 import worldData from '../../data/world.json';
 import 'leaflet/dist/leaflet.css';
+import SalesMappingSkeleton from './SalesMappingSkeleton';
 
 function FitBoundsAndLock() {
 
@@ -24,11 +25,13 @@ function FitBoundsAndLock() {
 
 export default function SalesMapping() {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getSalesMap()
             .then(setData)
-            .catch(err => console.error("Error loading sales map data:", err));
+            .catch(err => console.error("Error loading sales map data:", err))
+            .finally(() => setLoading(true));
     });
 
 
@@ -45,6 +48,8 @@ export default function SalesMapping() {
         color: "#fff",
         fillOpacity: 0.7,
     });
+
+    if (loading) return <SalesMappingSkeleton />
 
     return (
         <div className="bg-white p-4 rounded-xl shadow relative z-0 h-full w-full">

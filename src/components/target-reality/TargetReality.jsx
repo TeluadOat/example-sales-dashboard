@@ -9,15 +9,18 @@ import {
 } from "recharts";
 import { getTargetReality } from "../../services/api";
 import { FaRegBell } from "react-icons/fa";
+import TargetRealitySkeleton from "./TargetRealitySkeleton";
 
 export default function TargetReality() {
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getTargetReality()
             .then(setData)
             .catch(err => console.error("Error fetching Target Reality data:", err))
+            .finally(() => setLoading(false));
     }, []);
 
     const chartData = useMemo(() =>
@@ -34,7 +37,8 @@ export default function TargetReality() {
         targetTotal: chartData.reduce((a, b) => a + b.targetSales, 0),
     }), [chartData]);
 
-    if (data.length === 0) return <p>Loading Target vs Reality...</p>;
+
+    if (loading || !chartData.length) return (<TargetRealitySkeleton />)
 
     return (
         <div className="bg-white p-4 rounded shadow flex flex-col">

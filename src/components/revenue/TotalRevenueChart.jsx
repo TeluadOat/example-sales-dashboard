@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { getRevenue } from "../../services/api";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from "recharts";
+import TotalRevenueSkeleton from "./TotalRevenueSkeleton";
 
 export default function TotalRevenueChart() {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getRevenue()
             .then(data => setData(data))
             .catch(err => console.error('Error fetching data', err))
+            .finally(() => setLoading(false))
     }, []);
+
+    if (loading) return (<TotalRevenueSkeleton />);
 
     return (
         <div className="flex flex-col gap-2 bg-white p-4 rounded-lg shadow">

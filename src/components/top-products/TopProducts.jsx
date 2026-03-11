@@ -1,15 +1,18 @@
 import { useEffect, useState, useMemo } from "react";
 import { getTopProducts } from "../../services/api";
+import TopProductsSkeletion from "./TopProductsSkeleton";
 
 
 
 export default function TopProducts() {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getTopProducts()
             .then(setData)
-            .catch(err => console.error("Error fetching Top Products data:", err));
+            .catch(err => console.error("Error fetching Top Products data:", err))
+            .finally(() => setLoading(false))
     }, []);
 
     // function hexToRgba(hex, alpha = 0.12) {
@@ -22,6 +25,8 @@ export default function TopProducts() {
     function hslToHsla(hslString, opacity = 0.12) {
         return hslString.replace(/^hsl\((.+)\)$/i, `hsla($1, ${opacity})`);
     };
+
+    if (loading) return (<TopProductsSkeletion />)
 
     return (
         <div className="bg-white p-4 rounded shadow flex flex-col"

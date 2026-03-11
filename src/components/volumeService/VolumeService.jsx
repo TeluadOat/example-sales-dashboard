@@ -10,15 +10,18 @@ import {
     Legend,
 } from "recharts";
 import CustomLegend from "./CustomLegend";
+import VolumeServiceSkeleton from "./VolumeServiceSkeleton";
 
 export default function VolumeService() {
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getVolumeService()
             .then(setData)
-            .catch(err => console.error('Error fetching Volume service data:', err));
+            .catch(err => console.error('Error fetching Volume service data:', err))
+            .finally(() => setLoading(false));
     }, []);
 
     const chartData = useMemo(() =>
@@ -34,6 +37,7 @@ export default function VolumeService() {
         totalVolume: chartData.reduce((sum, d) => sum + d.volume, 0),
     }), [chartData]);
 
+    if (loading) return (<VolumeServiceSkeleton />);
 
     return (
         <div

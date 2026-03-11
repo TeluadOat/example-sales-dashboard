@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import KPIcard from "./KPIcard";
 import { getKpis } from "../../services/api";
 import { FaChartBar, FaCartArrowDown, FaChartLine, FaUserCircle } from "react-icons/fa";
+import KPISkeleton from "./KPISkeleton";
 
 export default function KPI() {
     const [kpis, setKpis] = useState([]);
@@ -37,7 +38,10 @@ export default function KPI() {
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <div>Loading KPIs...</div>;
+    if (loading) return (
+        <KPISkeleton />
+    );
+
     if (error) return <div>Error loading KPIs</div>;
 
     return (
