@@ -31,7 +31,7 @@ export default function SalesMapping() {
         getSalesMap()
             .then(setData)
             .catch(err => console.error("Error loading sales map data:", err))
-            .finally(() => setLoading(true));
+            .finally(() => setLoading(false));
     });
 
 
@@ -49,7 +49,7 @@ export default function SalesMapping() {
         fillOpacity: 0.7,
     });
 
-    if (loading) return <SalesMappingSkeleton />
+    if (loading) return (<SalesMappingSkeleton />)
 
     return (
         <div className="bg-white p-4 rounded-xl shadow relative z-0 h-full w-full">
