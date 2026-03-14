@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { getCustomerSatisfactions } from "../../services/api";
 import CustomLegend from "./CustomLegend";
-import CustomerSatisfactionSkeleton from "./customerSatisfactionSkeleton";
+import CustomerSatisfactionSkeleton from "./CustomerSatisfactionSkeleton";
 
 export default function CustomerSatisfaction() {
     const [data, setData] = useState([]);
